@@ -1,0 +1,139 @@
+
+<style>
+.required{color:red;font-weight:bold}
+.todo{color:green}
+.bordered a{display:inline}
+#content-main h2{margin-top:1em}
+#content-main h3{margin:1em 0}
+#content-main{overflow:auto}
+.bordered td,.bordered th{line-height:140%;word-wrap:break-word;}
+#content-main sup, #content-main sub{vertical-align:baseline;position:relative;top:-0.4em;font-weight:bold}
+#content-main sub{top:0.4em}
+#footnotes{margin-top:3em}
+#content-main pre{color:rgb(136,0,0);overflow:auto}
+.banner-redirect {
+	background-color: #e3fffb;
+	padding: 1em;
+}
+</style>
+
+<div id="content-main" class="with-sidebar">
+	
+	<h2 id="query syntax">Query Syntax</h2>
+
+	<p class="banner-redirect">We have recently released a new developer portal called <a href="http://labs.europeana.eu/api">Europeana Labs</a> where all the documentation and information about the Europeana APIs is available. The page you're viewing now is deprecated and will not be updated with any changes. By June 31 2014 this page will be deleted and links to it re-directed to <a href="http://labs.europeana.eu/api">Europeana Labs</a>.</p>  
+
+	<p>Internally Europeana uses the <a href="http://lucene.apache.org/solr/" target="_blank">Apache SOLR</a> platform to store its data and therefore it supports the <a href="https://lucene.apache.org/core/4_1_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description" target="_blank">Apache Lucene Query Syntax</a> for its queries. Advanced users are encouraged to use Lucene and Apache SOLR guides to get most out of the Europeana repository. Below we supply a basic guide for querying Europeana.</p>
+
+	<table class="bordered">
+
+
+	
+	<h3 id="basic">Basic Search</h3>
+
+	<p>
+	To look for records that contain a search term in one of the fields, provide the term as a <i>query</i>parameter:
+	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query="Mona Lisa"</pre>
+	<p><a href='/portal/api/console.html?function=search&query="Mona+Lisa"' target="_blank">» Test on the API Console</a></p>
+	
+	Note that like in many other search applications omitting the quotes will result in searching for records that contain the term Mona or the term Lisa but not necessarily both of them.
+	</p>
+	
+		
+
+	<p>
+	If you want to limit your search for a term to a specific field you should provide the name of the field using the following syntax. For example, to look for objects whose creator is Leonardo da Vinci:
+	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=who:"Leonardo da Vinci"</pre>
+	<p><a href='/portal/api/console.html?function=search&query=who:"Leonardo da Vinci"' target="_blank">» Test on the API Console</a></p>
+	
+	</p>
+	
+			
+	<p>Looking for one of several possible values in a specific field is done as follows. For example, here is how to look for records whose creator is one of the Dutch Golden Age maestros:
+	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=who:"Rembrandt Vermeer Steen"</pre>
+	<p><a href='/portal/api/console.html?function=search&query=who:"Rembrandt Vermeer Steen"' target="_blank">» Test on the API Console</a></p>
+	
+	</p>
+
+
+<h3 id="boolean">Boolean Search</h3>
+
+	<p>To combine several fields in one search one can use boolean operators AND, OR, and NOT (note the case-sensitivity). Use parentheses to group logical conditions.  Note that two consecutive terms without any boolean operator in between default to the AND operator. 
+	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=mona AND lisa</pre>
+	<p><a href='/portal/api/console.html?function=search&query=mona AND lisa' target="_blank">» Test on the API Console</a></p>
+	
+	</p>
+		
+	
+	<p>Boolean operators can also be used with a search by fields. The following example searches for objects whose location is in <i>Paris</i> or in <i>London</i>:
+
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=where: (Paris OR London)</pre>
+	<p><a href='/portal/api/console.html?function=search&query=where: (Paris OR London)' target="_blank">» Test on the API Console</a></p>	
+	
+	</p>
+	
+	
+	<p>The boolean NOT operator cannot be used alone but only in conjunction with another boolean operator. For example, looking for objects which contain the term <i>lisa</i> but do not contain the term <i>mona</i> is done by the following:
+	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=lisa NOT mona</pre>
+	<p><a href='/portal/api/console.html?function=search&query=lisa NOT mona' target="_blank">» Test on the API Console</a></p>
+	
+	</p>
+	
+<h3 id="faceted">Refinements</h3>	
+
+	<p>So far we dealt with examples where there was only one query term. Sometimes it is useful to split a query into a variable and a constant part. For instance, for an application that accesses only objects located in London, it is possible to have the constant part of the query pre-selecting London-based objects and the variable part of the query selecting objects within this pre-selection. </p>
+	<p>
+	This can be done using the refinement parameter <i>qf</i> which is appended to the <i>query</i> parameter. This example looks for objects which contain the term <i>Westminster</i> and their location is in London:
+	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=Westminster&qf=where:London</pre>
+	<p><a href='/portal/api/console.html?function=search&query=Westminster&qf=where:London' target="_blank">» Test on the API Console</a></p>
+	
+	</p>
+	
+	Refinement parameters can be concatenated. Each such parameter and the mandatory <i>query</i> parameter contributes a <a href="api-search-json.html#breadCrumb">breadcrumb</a> object if breadcrumbs are specified in the search profile.
+	
+<h3 id="faceted">Faceted Search</h3>
+
+	<p>Querying by <a href="api-data-structure.html#Facets">facets</a> is also done using the refinement parameter <i>qf</i>. The following example looks for objects containing the term <i>Paris</i> among images:
+	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=Paris&qf=TYPE:IMAGE</pre>
+	<a href='/portal/api/console.html?function=search&&query=Paris&qf=TYPE:IMAGE' target="_blank">» Test on the API Console</a></p>	
+	
+	<p>Here are more examples of faceted search. Looking for objects containing the term <i>Paris</i> among objects described in French:
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=Paris&qf=LANGUAGE:FR</pre>
+	<a href='/portal/api/console.html?function=search&&query=Paris&qf=LANGUAGE:FR' target="_blank">» Test on the API Console</a></p>	
+	
+	<p>Looking for objects containing the term <i>Paris</i> among objects dated by the year 1789</p>	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=Paris&qf=YEAR:1789</pre>
+	<a href='/portal/api/console.html?function=search&&query=Paris&qf=YEAR:1789' target="_blank">» Test on the API Console</a></p>		
+	
+	<p>Looking for objects containing the term <i>Paris</i> among objects provided by an institution based in France</p>	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=Paris&qf=COUNTRY:france</pre>
+	<a href='/portal/api/console.html?function=search&&query=Paris&qf=YEAR:1789' target="_blank">» Test on the API Console</a></p>			
+	
+	<p>Looking for objects containing the term <i>Paris</i> among objects protected by the 'Rights Reserved - Free Access' licence</p>	
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=Paris&qf=RIGHTS:http://www.europeana.eu/rights/rr-f/</pre>
+	<a href='/portal/api/console.html?function=search&&query=Paris&qf=RIGHTS:http://www.europeana.eu/rights/rr-f/' target="_blank">» Test on the API Console</a></p>				
+	
+	<p>Looking for objects containing the term <i>Paris</i> among objects provided by the European Library
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=Paris&qf=PROVIDER:The+European+Library</pre>
+	<a href='/portal/api/console.html?function=search&&query=Paris&qf=PROVIDER:The+European+Library' target="_blank">» Test on the API Console</a></p>					
+	
+	<p>Looking for objects containing the term <i>Paris</i> among objects provided by the user community
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=Paris&qf=UGC:true</pre>
+	<a href='/portal/api/console.html?function=search&&query=Paris&UGC:true' target="_blank">» Test on the API Console</a></p>						
+	
+	
+<h3 id="range-operator">Time Range Search</h3>
+
+	<p>Looking for objects dated by a year between 1525 and 1527:
+	<pre>http://www.europeana.eu/api/v2/search.json?wskey=xxxx&query=YEAR:[1525 TO 1527]</pre>
+	<p><a href='/portal/api/console.html?function=search&query=YEAR:[1525 TO 1527]' target="_blank">» Test on the API Console</a></p>
+
+</div>
+

@@ -1,0 +1,115 @@
+
+<style>
+.required{color:red;font-weight:bold}
+.todo{color:green}
+.bordered a{display:inline}
+#content-main h2{margin-top:1em}
+#content-main h3{margin:1em 0}
+#content-main{overflow:auto}
+.bordered td,.bordered th{line-height:140%;word-wrap:break-word;}
+#content-main sup, #content-main sub{vertical-align:baseline;position:relative;top:-0.4em;font-weight:bold}
+#content-main sub{top:0.4em}
+#footnotes{margin-top:3em}
+#content-main pre{color:rgb(136,0,0);overflow:auto}
+.banner-redirect {
+	background-color: #e3fffb;
+	padding: 1em;
+}
+</style>
+
+<div id="content-main" class="with-sidebar">
+	
+	<h2 id="suggestions.json">suggestions.json</h2>
+
+	<p class="banner-redirect">We have recently released a new developer portal called <a href="http://labs.europeana.eu/api">Europeana Labs</a> where all the documentation and information about the Europeana APIs is available. The page you're viewing now is deprecated and will not be updated with any changes. By June 31 2014 this page will be deleted and links to it re-directed to <a href="http://labs.europeana.eu/api">Europeana Labs</a>.</p> 
+
+		<p>Get autocompletion recommendation for search queries. This call returns a list of Europeana records that contain a query term in one of their fields.</p>
+
+		<h3 id="request">Request</h3>
+
+			<pre>http://europeana.eu/api/v2/suggestions.json</pre>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Parameter</th>
+						<th>Data&nbsp;type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>query <span class="required">*</span></td>
+						<td>string</td>
+						<td>The search term on which to search</td>
+					</tr>
+					<tr>
+						<td>callback</td>
+						<td>String</td>
+						<td>Name of a client side callback function.</td>
+					</tr>
+					<tr>
+						<td>rows</td>
+						<td>Number</td>
+						<td>The maximum number of results (the default is 10)</td>
+					</tr>
+				</tbody>
+			</table>
+	
+			<span class="required">*</span> <small>indicates a required parameter</small>
+
+
+		<h3 id="response">Response</h3>
+
+			<p>A response to this call contains <a href="/portal/api-common-fields.html" title="common fields">the common fields</a> which are standard for all Europeana API calls and the fields below which are specific for this call.</p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Data&nbsp;type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>items</td>
+						<td>Array (<a href="#item">Item</a>)</td>
+						<td>A collection of suggestion items.</td>
+					</tr>
+				</tbody>
+			</table>
+
+		<h3 id="item">Item</h3>
+
+			<p>Each item represents a recommendation for search that contains the submitted term.</p>
+			
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Data&nbsp;type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>term</td>
+						<td>String</td>
+						<td>search suggestion</td>
+					</tr>
+					<tr>
+						<td>frequency</td>
+						<td>Number</td>
+						<td>number of Europeana records that answer this suggestion</td>
+					</tr>
+					<tr>
+						<td>field</td>
+						<td>String</td>
+						<td><a href="/portal/api-data-structure.html#Aggregated">Aggregated Fields</a> where the term was found.</td>
+					</tr>
+				</tbody>
+			</table>
+
+</div>
+

@@ -1,0 +1,1294 @@
+
+<style>
+.required{color:red;font-weight:bold}
+.todo{color:green}
+.bordered a{display:inline}
+#content-main h2{margin-top:1em}
+#content-main h3{margin:1em 0}
+#content-main{overflow:auto}
+.bordered td,.bordered th{line-height:140%;word-wrap:break-word;}
+#content-main sup, #content-main sub{vertical-align:baseline;position:relative;top:-0.4em;font-weight:bold}
+#content-main sub{top:0.4em}
+#footnotes{margin-top:3em}
+#content-main pre{color:rgb(136,0,0);overflow:auto}
+.banner-redirect {
+	background-color: #e3fffb;
+	padding: 1em;
+}
+</style>
+
+<div id="content-main" class="with-sidebar">
+
+	<h2 id="record.json">record.json</h2>
+
+<p class="banner-redirect">We have recently released a new developer portal called <a href="http://labs.europeana.eu/api">Europeana Labs</a> where all the documentation and information about the Europeana APIs is available. The page you're viewing now is deprecated and will not be updated with any changes. By June 31 2014 this page will be deleted and links to it re-directed to <a href="http://labs.europeana.eu/api">Europeana Labs</a>.</p> 
+
+	<p>This API method is used for retrieving information about a single object in the Europeana repository. Its mandatory parameter is the unique Europeana ID of the record. Differently from other API parameters, the record ID is not supplied via a query parameter, but as part of the path within the URL. You can read more about identifying records in Europeana <i>here</i>.</p>
+
+	<h3 id="request">Request</h3>
+
+		<pre>http://europeana.eu/api/v2/record/[recordID].json</pre>
+
+		<table class="bordered">
+			<thead>
+				<tr>
+					<th>Parameter</th>
+					<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>recordID <span class="required">*</span></td>
+					<td>Number</td>
+					<td>The <a href="/portal/api-data-structure.html#EuropeanaID">Europeana ID</a> of the record that was requested.</td>
+				</tr>
+				<tr>
+					<td>callback</td>
+					<td>String</td>
+					<td>Name of a client side callback function.</td>
+				</tr>
+				<tr>
+					<td>profile</td>
+					<td>String</td>
+					<td>Controls the amount of information returned. The following options are possible:
+						<ul>
+							<li><b>full</b> all the available information about the returned records will be returned</li>
+							<li><b>similar</b> the information about similar items will be returned</li>
+							<li><b>params</b> to echo the parameters in the response's <a href="api-working-with-api.html#Response">params field</a></li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<span class="required">*</span> <small>indicates a required parameter</small>
+
+	<h3 id="response">Response</h3>
+
+		<p>A response to this call contains <a title="Response" href="/portal/api-working-with-api.html#Response">the common fields</a> which are standard for all Europeana API calls and the fields below which are specific for this call</p>
+
+		<table class="bordered">
+			<thead>
+				<tr>
+					<th>Field</th>
+					<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>object <span class="required">*</span></td>
+					<td><a href="#object">Object</td>
+					<td>An object representing an EDM metadata record.</td>
+				</tr>
+				<tr>
+					<td>similarItems</td>
+					<td><a href="/portal/api-search-json.html#item" title="item[]">Array (item)</a></td>
+					<td>A collection of metadata records similar to the current one. Available only if profile parameter’s value is set to <i>similar</i>. The structure of each record is the same as the structure of the <a href="/portal/api-search-json.html#item">items</a> collection returned by the <a title="Search" href="/portal/api-search-json.html">search.json method</a>.</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<span class="required">*</span> <small>indicates an object property guaranteed to be in the object</small>
+
+
+	<h3 id="object">object</h3>
+
+		<p>An object representing an EDM metadata record.</p>
+
+		<table class="bordered">
+			<thead>
+				<tr>
+					<th>Field</th>
+					<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>about</td>
+					<td>String</td>
+					<td>The <a href="/portal/api-data-structure.html#EuropeanaID">Europeana ID</a> of the returned record.</td>
+				</tr>
+				<tr>
+					<td>agents</td>
+					<td>Array (<a href="#Agent">Agent</a>)</td>
+					<td>A collection of Agent objects contextually related to this record. Find more in the <a href="http://pro.europeana.eu/documents/900548/bb6b51df-ad11-4a78-8d8a-44cc41810f22">EDM Definition</a>.</td>
+				</tr>
+				<tr>
+					<td>aggregations</td>
+					<td>Array (<a href="#Aggregation">Aggregation</a>)</td>
+					<td>A collection of Aggregation objects related to the record. Find more in the <a href="http://pro.europeana.eu/documents/900548/bb6b51df-ad11-4a78-8d8a-44cc41810f22">EDM Definition</a>.</td>
+				</tr>
+				<tr>
+					<td>concepts</td>
+					<td>Array (<a href="#Concept">Concept</a>)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>country</td>
+					<td>Array (String)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>europeanaAggregation</td>
+					<td>Array (<a href="#EuropeanaAggregation">EuropeanaAggregation</a>)</td>
+					<td>A collection of Europeana Aggregation objects related to the record. Find more in the <a href="http://pro.europeana.eu/documents/900548/bb6b51df-ad11-4a78-8d8a-44cc41810f22">EDM Definition</a>.</td>
+				</tr>
+				<tr>
+					<td>europeanaCollectionName</td>
+					<td>Array (String)</td>
+					<td>A collection of collection identifiers that this record belongs to (TBD).</td>
+				</tr>
+				<tr>
+					<td>europeanaCompleteness</td>
+					<td>Number</td>
+					<td>A number between 0 and 10 representing the metadata quality of the record. This value is based on Europeana internal calculation and can change in the future.</td>
+				</tr>
+				<tr>
+					<td>language</td>
+					<td>Array (String)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>optOut</td>
+					<td>Boolean</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>places</td>
+					<td>Array (<a href="#Place">Place</a>)</td>
+					<td>A collection of Place objects contextually related to the record. Find more in the <a href="http://pro.europeana.eu/documents/900548/bb6b51df-ad11-4a78-8d8a-44cc41810f22">EDM Definition</a>.</td>
+				</tr>
+				<tr>
+					<td>provider</td>
+					<td>Array (String)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>providedCHOs</td>
+					<td>Array (<a href="#ProvidedCHO">ProvidedCHO</a>)</td>
+					<td>A collection of Provided Cultural Heritage Objects related to the record. Find more in the <a href="http://pro.europeana.eu/documents/900548/bb6b51df-ad11-4a78-8d8a-44cc41810f22">EDM Definition</a>.</td>
+				</tr>
+				<tr>
+					<td>proxies</td>
+					<td>Array (<a href="#Proxy">Proxy</a>)</td>
+					<td>A collection of proxy objects for Provided Cultural Heritage Objects. Find more in the <a href="http://pro.europeana.eu/documents/900548/bb6b51df-ad11-4a78-8d8a-44cc41810f22">EDM Definition</a>.</td>
+				</tr>
+				<tr>
+					<td>timespans</td>
+					<td>Array (<a href="#Timespan">Timespan</a>)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>timestamp</td>
+					<td>Date</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>title</td>
+					<td>Array (String)</td>
+					<td>The main and alternative titles of the item.</td>
+				</tr>
+				<tr>
+					<td>type</td>
+					<td>String</td>
+					<td>The type of the object (see the <a href="api-data-structure.html#Facets">TYPE facet</a>)</td>
+				</tr>
+				<tr>
+					<td>userTags</td>
+					<td>Array (String)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>year</td>
+					<td>Array (String)</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<h3 id="Agent">Agent class</h3>
+
+			<p>An EDM Agent class. This class comprises people, either individually or in groups, who have the potential to perform intentional actions for which they can be held responsible.</p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Qualified&nbsp;Name</th>
+						<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>about</td>
+						<td>rdf:about</td>
+						<td>String</td>
+						<td>The URI of the object, usually a DBpedia URL.</td>
+					</tr>
+					<tr>
+						<td>prefLabel</td>
+						<td>skos:prefLabel</td>
+						<td>LangMap</td>
+						<td>Preferred lexical label.</td>
+					</tr>
+					<tr>
+						<td>altLabel</td>
+						<td>skos:altLabel</td>
+						<td>LangMap</td>
+						<td>Alternative lexical label.</td>
+					</tr>
+					<tr>
+						<td>hiddenLabel</td>
+						<td>skos:hiddenLabel</td>
+						<td>LangMap</td>
+						<td>A hidden lexical label, represented by means of the skos:hiddenLabel property, is a lexical label for a resource, where a KOS designer would like that character string to be accessible to applications performing text-based indexing and search operations, but would not like that label to be visible otherwise.</td>
+					</tr>
+					<tr>
+						<td>note</td>
+						<td>skos:note</td>
+						<td>LangMap</td>
+						<td>Property for general documentation purposes.</td>
+					</tr>
+					<tr>
+						<td>begin</td>
+						<td>edm:begin</td>
+						<td>LangMap</td>
+						<td>This property denotes the start date of a period of time.</td>
+					</tr>
+					<tr>
+						<td>end</td>
+						<td>edm:end</td>
+						<td>LangMap</td>
+						<td>This property denotes the end date of a period of time.</td>
+					</tr>
+					<tr>
+						<td>edmWasPresentAt</td>
+						<td>edm:wasPresentAt</td>
+						<td>Array (String)</td>
+						<td>This property associates the people, things or information resources with an event at which they were present</td>
+					</tr>
+					<tr>
+						<td>edmHasMet</td>
+						<td>edm:hasMet</td>
+						<td>LangMap</td>
+						<td>edm:hasMet relates a resource with the objects or phenomena that have happened to or have happened together with the resource under consideration. We can abstractly think of history and the present as a series of "meetings" between people and other things in space-time. Therefore we name this relationship as the things the object “has met” in the course of its existence.</td>
+					</tr>
+					<tr>
+						<td>edmIsRelatedTo</td>
+						<td>edm:isRelatedTo</td>
+						<td>LangMap</td>
+						<td>edm:isRelatedTo is the most general contextual property in EDM. Contextual properties have typically to do either with the things that have happened to or together with the object under consideration, or what the object refers to by its shape, form or features in a figural or encoded form.</td>
+					</tr>
+					<tr>
+						<td>owlSameAs</td>
+						<td>owl:sameAs</td>
+						<td>Array (String)</td>
+						<td>owl:sameAs links an individual to an individual. Such an owl:sameAs statement indicates that two URI references actually refer to the same thing: the individuals have the same "identity".</td>
+					</tr>
+					<tr>
+						<td>foafName</td>
+						<td>foaf:name</td>
+						<td>LangMap</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>dcDate</td>
+						<td>dc:date</td>
+						<td>LangMap</td>
+						<td>A point or period of time associated with an event in the lifecycle of the resource.</td>
+					</tr>
+					<tr>
+						<td>dcIdentifier</td>
+						<td>dc:identifier</td>
+						<td>LangMap</td>
+						<td>An unambiguous reference to the resource within a given context.</td>
+					</tr>
+					<tr>
+						<td>rdaGr2DateOfBirth</td>
+						<td>rdaGr2:dateOfBirth</td>
+						<td>LangMap</td>
+						<td>The year a person was born. Date of birth may also include the month and day of the person’s birth.</td>
+					</tr>
+					<tr>
+						<td>rdaGr2DateOfDeath</td>
+						<td>rdaGr2:dateOfDeath</td>
+						<td>LangMap</td>
+						<td>The year a person died. Date of death may also include the month and day of the person’s death.</td>
+					</tr>
+					<tr>
+						<td>rdaGr2DateOfEstablishment</td>
+						<td>rdaGr2:dateOfEstablishment</td>
+						<td>LangMap</td>
+						<td>The date on which a corporate body was established or founded.</td>
+					</tr>
+					<tr>
+						<td>rdaGr2DateOfTermination</td>
+						<td>rdaGr2:dateOfTermination</td>
+						<td>LangMap</td>
+						<td>The date on which a corporate body was terminated or dissolved.</td>
+					</tr>
+					<tr>
+						<td>rdaGr2Gender</td>
+						<td>rdaGr2:gender</td>
+						<td>LangMap</td>
+						<td>The gender with which a person identifies. </td>
+					</tr>
+					<tr>
+						<td>rdaGr2ProfessionOrOccupation</td>
+						<td>rdaGr2:professionOrOccupation</td>
+						<td>LangMap</td>
+						<td>A profession or occupation in which a person works or has worked.</td>
+					</tr>
+					<tr>
+						<td>rdaGr2BiographicalInformation</td>
+						<td>rdaGr2:biographicalInformation</td>
+						<td>LangMap</td>
+						<td>Information pertaining to the life or history of a person.</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+		<h3 id="Aggregation">Aggregation class</h3>
+
+			<p>EDM Aggregation. The set of resources related to a single cultural heritage object that collectively represent that object in Europeana. Such set consists of: all descriptions about the object that Europeana collects from (possibly different) content providers, including thumbnails and other forms of abstractions, as well as of the description of the object Europeana builds. Find more in the <a href="http://pro.europeana.eu/documents/900548/bb6b51df-ad11-4a78-8d8a-44cc41810f22">EDM Definition</a>.</p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Qualified&nbsp;Name</th>
+						<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>about</td>
+						<td>rdf:about</td>
+						<td>String</td>
+						<td>URI of the aggregation</td>
+					</tr>
+					<tr>
+						<td>edmDataProvider</td>
+						<td>edm:dataProvider</td>
+						<td>LangMap</td>
+						<td>A name or identifier of organizations that contributed objects in this aggregation.</td>
+					</tr>
+					<tr>
+						<td>edmIsShownBy</td>
+						<td>edm:isShownBy</td>
+						<td>String</td>
+						<td>An unambiguous URL reference to the digital object on the provider’s web site in the best available resolution/quality.</td>
+					</tr>
+					<tr>
+						<td>edmIsShownAt</td>
+						<td>edm:isShownAt</td>
+						<td>String</td>
+						<td>An unambiguous URL reference to the digital object on the provider’s web site in its full information context.</td>
+					</tr>
+					<tr>
+						<td>edmObject</td>
+						<td>edm:object</td>
+						<td>String</td>
+						<td>The URL of a thumbnail representing the digital object.</td>
+					</tr>
+					<tr>
+						<td>edmProvider</td>
+						<td>edm:provider</td>
+						<td>LangMap</td>
+						<td>A name or identifier of organizations that delivered the objects in this aggregation.</td>
+					</tr>
+					<tr>
+						<td>edmRights</td>
+						<td>edm:rights</td>
+						<td>LangMap</td>
+						<td>Information about copyright of the digital objects in this aggregation.</td>
+					</tr>
+					<tr>
+						<td>edmUgc</td>
+						<td>edm:ugc</td>
+						<td>String</td>
+						<td>This element is used to identify user generated content (also called user created content). It should be applied to all digitised or born digital content contributed by the general public and collected by Europeana through a crowdsourcing initiative or project.</td>
+					</tr>
+					<tr>
+						<td>dcRights</td>
+						<td>dc:rights</td>
+						<td>LangMap</td>
+						<td>Information about rights held in and over the resource.</td>
+					</tr>
+					<tr>
+						<td>hasView</td>
+						<td>edm:hasView</td>
+						<td>Array (String)</td>
+						<td>This property relates a ORE aggregation about a CHO with a web resource providing a view of that CHO. Examples of view are: a thumbnail, a textual abstract and a table of contents.</td>
+					</tr>
+					<tr>
+						<td>aggregatedCHO</td>
+						<td>edm:aggregatedCHO</td>
+						<td>String</td>
+						<td>The <a href="/portal/api-data-structure.html#EuropeanaID">Europeana ID</a> of the record corresponding to the CHO of this aggregation.</td>
+					</tr>
+					<tr>
+						<td>aggregates</td>
+						<td>ore:aggregates</td>
+						<td>Array (String)</td>
+						<td>This is a container element which includes all relevant information that otherwise cannot be mapped to another element in the ESE.</td>
+					</tr>
+					<tr>
+						<td>edmUnstored</td>
+						<td>edm:unstored</td>
+						<td>Array (String)</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>webResources</td>
+						<td>edm:WebResources</td>
+						<td>Array (<a href="#webResources">webResources</a>)</td>
+						<td>Information Resources that have at least one Web Representation and at least a URI.</td>
+					</tr>
+				</tbody>
+			</table>
+
+		<h3 id="Concept">Concept class</h3>
+
+			<p>SKOS* <a href="http://www.w3.org/TR/skos-reference/#concepts">Concept</a>. A SKOS concept can be viewed as an idea or notion; a unit of thought. All element of this class belong to the skos namespace.<br/>
+			* SKOS stands for <a href="http://www.w3.org/TR/skos-reference/">Simple Knowledge Organization System</a>, a W3C standard</p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Qualified&nbsp;Name</th>
+						<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>about</td>
+						<td>rdf:about</td>
+						<td>String</td>
+						<td>Defines the resource being described</td>
+					</tr>
+					<tr>
+						<td>prefLabel</td>
+						<td>skos:prefLabel</td>
+						<td>LangMap</td>
+						<td>Preferred lexical label.</td>
+					</tr>
+					<tr>
+						<td>altLabel</td>
+						<td>skos:altLabel</td>
+						<td>LangMap</td>
+						<td>Alternative lexical label.</td>
+					</tr>
+					<tr>
+						<td>hiddenLabel</td>
+						<td>skos:hiddenLabel</td>
+						<td>LangMap</td>
+						<td>A hidden lexical label, represented by means of the skos:hiddenLabel property, is a lexical label for a resource, where a KOS designer would like that character string to be accessible to applications performing text-based indexing and search operations, but would not like that label to be visible otherwise.</td>
+					</tr>
+					<tr>
+						<td>note</td>
+						<td>skos:note</td>
+						<td>LangMap</td>
+						<td>Property for general documentation purposes.</td>
+					</tr>
+					<tr>
+						<td>broader</td>
+						<td>skos:broader</td>
+						<td>Array (String)</td>
+						<td>Asserts a direct hierarchical link between two SKOS concepts. A triple A skos:broader B asserts that B, the object of the triple, is a broader concept than A, the subject of the triple.</td>
+					</tr>
+					<tr>
+						<td>narrower</td>
+						<td>skos:narrower</td>
+						<td>Array (String)</td>
+						<td>Asserts a direct hierarchical link between two SKOS concepts. A triple C skos:narrower D asserts that D, the object of the triple, is a narrower concept than C, the subject of the triple.</td>
+					</tr>
+					<tr>
+						<td>related</td>
+						<td>skos:related</td>
+						<td>Array (String)</td>
+						<td>Asserts an associative link between two SKOS concepts.</td>
+					</tr>
+					<tr>
+						<td>broadMatch</td>
+						<td>skos:broadMatch</td>
+						<td>Array (String)</td>
+						<td>skos:broadMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes. </td>
+					</tr>
+					<tr>
+						<td>narrowMatch</td>
+						<td>skos:narrowMatch</td>
+						<td>Array (String)</td>
+						<td>skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</td>
+					</tr>
+					<tr>
+						<td>exactMatch</td>
+						<td>skos:exactMatch</td>
+						<td>Array (String)</td>
+						<td>skos:exactMatch is used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications. skos:exactMatch is a transitive property, and is a sub-property of skos:closeMatch.</td>
+					</tr>
+					<tr>
+						<td>relatedMatch</td>
+						<td>skos:relatedMatch</td>
+						<td>Array (String)</td>
+						<td>skos:relatedMatch is used to state an associative mapping link between two conceptual resources in different concept schemes.</td>
+					</tr>
+					<tr>
+						<td>closeMatch</td>
+						<td>skos:closeMatch</td>
+						<td>Array (String)</td>
+						<td>A skos:closeMatch assertion indicates that two concepts are sufficiently similar that they can be used interchangeably in applications that consider the two concept schemes they belong to. However, skos:closeMatch is not defined as transitive, which prevents such similarity assessments to propagate beyond these two schemes. If a concept ex1:A is a close match for another concept ex2:B which is itself a close match for ex3:C, it does not follow from the SKOS data model that ex1:A is a close match for ex3:C.</td>
+					</tr>
+					<tr>
+						<td>notation</td>
+						<td>skos:skosnotation</td>
+						<td>LangMap</td>
+						<td>A notation is a string of characters such as "T58.5" or "303.4833" used to uniquely identify a concept within the scope of a given concept scheme.</td>
+					</tr>
+					<tr>
+						<td>inScheme</td>
+						<td>skos:inScheme</td>
+						<td>Array (String)</td>
+						<td>Relates a resource (for example a concept) to a concept scheme in which it is included.</td>
+					</tr>
+				</tbody>
+			</table>
+
+		<h3 id="EuropeanaAggregation">EuropeanaAggregation class</h3>
+
+			<p>EDM Europeana Aggregation. The set of resources related to a single cultural heritage object that collectively represent that object in Europeana. Such set consists of: all descriptions about the object that Europeana collects from (possibly different) content providers, including thumbnails and other forms of abstractions, as well as of the description of the object Europeana builds.</p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Qualified&nbsp;Name</th>
+						<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>about</td>
+						<td>rdf:about</td>
+						<td>String</td>
+						<td>URI of the europeanaAggregation</td>
+					</tr>
+					<tr>
+						<td>webResources</td>
+						<td>edm:WebResources</td>
+						<td>Array (<a href="#webResources">webResources</a>)</td>
+						<td>A collection of webResource objects </td>
+					</tr>
+					<tr>
+						<td>aggregatedCHO</td>
+						<td>edm:aggregatedCHO</td>
+						<td>String</td>
+						<td>The ID of the record corresponding to the CHO of this aggregation</td>
+					</tr>
+					<tr>
+						<td>aggregates</td>
+						<td>ore:aggregates</td>
+						<td>Array (String)</td>
+						<td>Aggregations, by definition, aggregate resources. The ore:aggregates relationship expresses that the object resource is a member of the set of aggregated resources of the subject (the Aggregation). This relationship between the Aggregation and its Aggregated Resources is thus more specific than a simple part/whole relationship, as expressed by dcterms:hasPart for example.</td>
+					</tr>
+					<tr>
+						<td>dcCreator</td>
+						<td>dc:creator</td>
+						<td>LangMap</td>
+						<td>A creator definitions. This field has always the value <i>Europeana</i></td>
+					</tr>
+					<tr>
+						<td>edmLandingPage</td>
+						<td>edm:landingPage</td>
+						<td>String</td>
+						<td>This property captures the relation between an aggregation representing a cultural heritage object and the Web resource representing that object on the provider’s web site.</td>
+					</tr>
+					<tr>
+						<td>edmIsShownBy</td>
+						<td>edm:isShownBy</td>
+						<td>String</td>
+						<td>An unambiguous URL reference to the digital object on the provider’s web site in the best available resolution/quality.</td>
+					</tr>
+					<tr>
+						<td>edmHasView</td>
+						<td>edm:hasView</td>
+						<td>Array (string)</td>
+						<td>This property relates a ORE aggregation about a CHO with a web resource providing a view of that CHO. Examples of view are: a thumbnail, a textual abstract and a table of contents.</td>
+					</tr>
+					<tr>
+						<td>edmCountry</td>
+						<td>edm:country</td>
+						<td>LangMap</td>
+						<td>This is the name of the country in which the Provider is based or “Europe” in the case of Europe-wide projects.</td>
+					</tr>
+					<tr>
+						<td>edmLanguage</td>
+						<td>edm:language</td>
+						<td>LangMap</td>
+						<td>A language assigned to the resource with reference to the Provider.</td>
+					</tr>
+					<tr>
+						<td>edmRights</td>
+						<td>edm:rights</td>
+						<td>LangMap</td>
+						<td>Information about copyright of the digital object as specified by isShownBy and isShownAt.</td>
+					</tr>
+					<tr>
+						<td>edmPreview</td>
+						<td>edm:preview</td>
+						<td>String</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
+		<h3 id="Place">Place</h3>
+
+			<p>EDM Place. An "extent in space, in particular on the surface of the earth, in the pure sense of physics: independent from temporal phenomena and matter" (CIDOC CRM).</p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Qualified&nbsp;Name</th>
+						<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>about</td>
+						<td>rdf:about</td>
+						<td>String</td>
+						<td>Defines the resource being described</td>
+					</tr>
+					<tr>
+						<td>prefLabel</td>
+						<td>skos:prefLabel</td>
+						<td>LangMap</td>
+						<td>Preferred lexical label.</td>
+					</tr>
+					<tr>
+						<td>altLabel</td>
+						<td>skos:altLabel</td>
+						<td>LangMap</td>
+						<td>Alternative lexical label.</td>
+					</tr>
+					<tr>
+						<td>hiddenLabel</td>
+						<td>skos:hiddenLabel</td>
+						<td>LangMap</td>
+						<td>A hidden lexical label, represented by means of the skos:hiddenLabel property, is a lexical label for a resource, where a KOS designer would like that character string to be accessible to applications performing text-based indexing and search operations, but would not like that label to be visible otherwise.</td>
+					</tr>
+					<tr>
+						<td>note</td>
+						<td>skos:note</td>
+						<td>LangMap</td>
+						<td>Property for general documentation purposes.</td>
+					</tr>
+					<tr>
+						<td>isPartOf</td>
+						<td>dcterms:isPartOf</td>
+						<td>LangMap</td>
+						<td>A related resource in which the described resource is physically or logically included.</td>
+					</tr>
+					<tr>
+						<td>latitude</td>
+						<td>wgs84:lat</td>
+						<td>Number</td>
+						<td>The latitude of the Place</td>
+					</tr>
+					<tr>
+						<td>longitude</td>
+						<td>wgs84:long</td>
+						<td>Number</td>
+						<td>The longitude of the Place</td>
+					</tr>
+					<tr>
+						<td>altitude</td>
+						<td>wgs84:alt</td>
+						<td>Number</td>
+						<td>The altitude of the Place</td>
+					</tr>
+					<tr>
+						<td>position</td>
+						<td>wgs84:lat_long</td>
+						<td>Object</td>
+						<td>A comma-separated representation of a latitude, longitude coordinate.</td>
+					</tr>
+					<tr>
+						<td>dcTermsHasPart</td>
+						<td>dcterms:hasPart</td>
+						<td>LangMap</td>
+						<td>A related resource that is included either physically or logically in the described resource.</td>
+					</tr>
+					<tr>
+						<td>owlSameAs</td>
+						<td>owl:sameAs</td>
+						<td>Array (String)</td>
+						<td>owl:sameAs links an individual to an individual. Such an owl:sameAs statement indicates that two URI references actually refer to the same thing: the individuals have the same "identity".</td>
+					</tr>
+				</tbody>
+			</table>
+
+		<h3 id="ProvidedCHO">ProvidedCHO class</h3>
+
+			<p>EDM ProvidedCHO (Provided Cultural Heritage Object). This class comprises the Cultural Heritage objects that Europeana collects descriptions about.</p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Qualified&nbsp;Name</th>
+						<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>about</td>
+						<td>rdf:about</td>
+						<td>String</td>
+						<td>Defines the resource being described</td>
+					</tr>
+					<tr>
+						<td>owlSameAs</td>
+						<td>owl:sameAs</td>
+						<td>Array (String)</td>
+						<td>owl:sameAs links an individual to an individual. Such an owl:sameAs statement indicates that two URI references actually refer to the same thing: the individuals have the same "identity".</td>
+					</tr>
+				</tbody>
+			</table>
+
+		<h3 id="Proxy">Proxy class</h3>
+
+			<p>ORE* <a href="http://www.openarchives.org/ore/1.0/vocabulary#proxy">Proxy</a>. Europeana uses proxies as place-holders for cultural heritage objects within aggregations (whether Europeana aggregations or not) to the end of making assertions about the corresponding cultural heritage objects while distinguishing the provenance of these assertions. This class is used to create aliases of cultural heritage objects to which descriptions are attached. This allows Europeana to keep track of provenance of descriptions. See chapter <em>6.1 Introducing proxies</em> in the <a href="http://www.pro.europeana.eu/documents/900548/770bdb58-c60e-4beb-a687-874639312ba5">EDM primer</a><br/>
+			* ORE stands for Open Archives Initiative Object Reuse and Exchange</p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Qualified&nbsp;Name</th>
+						<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>about</td>
+						<td>rdf:about</td>
+						<td>String</td>
+						<td>Defines the resource being described</td>
+					</tr>
+					<tr>
+						<td>dcContributor</td>
+						<td>dc:contributor</td>
+						<td>LangMap</a></td>
+						<td>An entity responsible for making contributions to the resource.</td>
+					</tr>
+					<tr>
+						<td>dcCoverage</td>
+						<td>dc:coverage</td>
+						<td>LangMap</a></td>
+						<td>The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.</td>
+					</tr>
+					<tr>
+						<td>dcCreator</td>
+						<td>dc:creator</td>
+						<td>LangMap</td>
+						<td>An entity primarily responsible for making the resource. This may be a person, organisation or a service.</td>
+					</tr>
+					<tr>
+						<td>dcDate</td>
+						<td>dc:date</td>
+						<td>LangMap</td>
+						<td>A point or period of time associated with an event in the lifecycle of the resource.</td>
+					</tr>
+					<tr>
+						<td>dcDescription</td>
+						<td>dc:description</td>
+						<td>LangMap</td>
+						<td>An account of the resource.</td>
+					</tr>
+					<tr>
+						<td>dcFormat</td>
+						<td>dc:format</td>
+						<td>LangMap</td>
+						<td>The file format, physical medium or dimensions of the resource.</td>
+					</tr>
+					<tr>
+						<td>dcIdentifier</td>
+						<td>dc:identifier</td>
+						<td>LangMap</td>
+						<td>An unambiguous reference to the resource within a given context.</td>
+					</tr>
+					<tr>
+						<td>dcLanguage</td>
+						<td>dc:language</td>
+						<td>LangMap</td>
+						<td>A language of the resource</td>
+					</tr>
+					<tr>
+						<td>dcPublisher</td>
+						<td>dc:publisher</td>
+						<td>LangMap</td>
+						<td>An entity responsible for making the resource available. Examples of a publisher include a person, an organisation and a service.</td>
+					</tr>
+					<tr>
+						<td>dcRelation</td>
+						<td>dc:relation</td>
+						<td>LangMap</td>
+						<td>A related resource. The recommended best practice is to identify the resource using a formal identification scheme.</td>
+					</tr>
+					<tr>
+						<td>dcRights</td>
+						<td>dc:rights</td>
+						<td>LangMap</td>
+						<td>Information about rights held in and over the resource.</td>
+					</tr>
+					<tr>
+						<td>dcSource</td>
+						<td>dc:source</td>
+						<td>LangMap</td>
+						<td>A related resource from which the described resource is derived in whole or in part.</td>
+					</tr>
+					<tr>
+						<td>dcSubject</td>
+						<td>dc:subject</td>
+						<td>LangMap</td>
+						<td>The topic of the resource.</td>
+					</tr>
+					<tr>
+						<td>dcTitle</td>
+						<td>dc:title</td>
+						<td>LangMap</td>
+						<td>A name given to the resource. Typically, a Title will be a name by which the resource is formally known.</td>
+					</tr>
+					<tr>
+						<td>dcType</td>
+						<td>dc:type</td>
+						<td>LangMap</td>
+						<td>The nature or genre of the resource. Type includes terms describing general categories, functions, genres, or aggregation levels for content.</td>
+					</tr>
+					<tr>
+						<td>dctermsAlternative</td>
+						<td>dcterms:alternative</td>
+						<td>LangMap</td>
+						<td>An alternative name for the resource. This can be any form of the title that is used as a substitute or an alternative to the formal title of the resource including abbreviations or translations of the title.</td>
+					</tr>
+					<tr>
+						<td>dctermsConformsTo</td>
+						<td>dcterms:conformsTo</td>
+						<td>LangMap</td>
+						<td>An established standard to which the described resource conforms.</td>
+					</tr>
+					<tr>
+						<td>dctermsCreated</td>
+						<td>dcterms:created</td>
+						<td>LangMap</td>
+						<td>Date of creation of the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsExtent</td>
+						<td>dcterms:extent</td>
+						<td>LangMap</td>
+						<td>The size or duration of the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsHasFormat</td>
+						<td>dcterms:hasFormat</td>
+						<td>LangMap</td>
+						<td>A related resource that is substantially the same as the pre-existing described resource, but in another format.</td>
+					</tr>
+					<tr>
+						<td>dctermsHasPart</td>
+						<td>dcterms:hasPart</td>
+						<td>LangMap</td>
+						<td>A related resource that is included either physically or logically in the described resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsHasVersion</td>
+						<td>dcterms:hasVersion</td>
+						<td>LangMap</td>
+						<td>A related resource that is a version, edition, or adaptation of the described resource. Changes in version imply substantive changes in content rather than differences in format.</td>
+					</tr>
+					<tr>
+						<td>dctermsIsFormatOf</td>
+						<td>dcterms:isFormatOf</td>
+						<td>LangMap</td>
+						<td>A related resource that is substantially the same as the described resource, but in another format.</td>
+					</tr>
+					<tr>
+						<td>dctermsIsPartOf</td>
+						<td>dcterms:isPartOf</td>
+						<td>LangMap</td>
+						<td>A related resource in which the described resource is physically or logically included.</td>
+					</tr>
+					<tr>
+						<td>dctermsIsReferencedBy</td>
+						<td>dcterms:isReferencedBy</td>
+						<td>LangMap</td>
+						<td>A related resource that references, cites, or otherwise points to the described resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsIsReplacedBy</td>
+						<td>dcterms:isReplacedBy</td>
+						<td>LangMap</td>
+						<td>A related resource that supplants, displaces, or supersedes the described resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsIsRequiredBy</td>
+						<td>dcterms:isRequiredBy</td>
+						<td>LangMap</td>
+						<td>A related resource that requires the described resource to support its function, delivery or coherence.</td>
+					</tr>
+					<tr>
+						<td>dctermsIssued</td>
+						<td>dcterms:issued</td>
+						<td>LangMap</td>
+						<td>Date of formal issuance (e.g., publication) of the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsIsVersionOf</td>
+						<td>dcterms:isVersionOf</td>
+						<td>LangMap</td>
+						<td>A related resource of which the described resource is a version, edition, or adaptation. Changes in version imply substantive changes in content rather than differences in format.</td>
+					</tr>
+					<tr>
+						<td>dctermsMedium</td>
+						<td>dcterms:medium</td>
+						<td>LangMap</td>
+						<td>The material or physical carrier of the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsProvenance</td>
+						<td>dcterms:provenance</td>
+						<td>LangMap</td>
+						<td>A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity and interpretation. This may include a description of any changes successive custodians made to the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsReferences</td>
+						<td>dcterms:references</td>
+						<td>LangMap</td>
+						<td>A related resource that is referenced, cited, or otherwise pointed to by the described resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsReplaces</td>
+						<td>dcterms:replaces</td>
+						<td>LangMap</td>
+						<td>A related resource that is supplanted, displaced, or superseded by the described resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsRequires</td>
+						<td>dcterms:requires</td>
+						<td>LangMap</td>
+						<td>A related resource that is required by the described resource to support its function, delivery or coherence.</td>
+					</tr>
+					<tr>
+						<td>dctermsSpatial</td>
+						<td>dcterms:spatial</td>
+						<td>LangMap</td>
+						<td>Spatial characteristics of the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsTOC</td>
+						<td>dcterms:tableOfContents</td>
+						<td>LangMap</td>
+						<td>Table Of Contents. A list of subunits of the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsTemporal</td>
+						<td>dcterms:temporal</td>
+						<td>LangMap</td>
+						<td>Temporal characteristics of the resource.</td>
+					</tr>
+					<tr>
+						<td>edmCurrentLocation</td>
+						<td>edm:currentLocation</td>
+						<td>String</td>
+						<td>The geographic location and/or name of the repository, building, site, or other entity whose boundaries presently include the resource.</td>
+					</tr>
+					<tr>
+						<td>edmHasMet</td>
+						<td>edm:hasMet</td>
+						<td>LangMap</td>
+						<td>edm:hasMet relates a resource with the objects or phenomena that have happened to or have happened together with the resource under consideration. We can abstractly think of history and the present as a series of “meetings” between people and other things in space-time. Therefore we name this relationship as the things the object “has met” in the course of its existence. These meetings are events in the proper sense, in which other people and things participate in any role.</td>
+					</tr>
+						<tr>
+						<td>edmHasType</td>
+						<td>edm:hasType</td>
+						<td>LangMap</td>
+						<td>This property relates a resource with the concepts it belongs to in a suitable type system such as MIME or any thesaurus that captures categories of objects in a given field (e.g., the “Objects” facet in Getty’s Art and Architecture Thesaurus). It does not capture aboutness.</td>
+					</tr>
+					<tr>
+						<td>edmIncorporates</td>
+						<td>edm:incorporates</td>
+						<td>Array (String)</td>
+						<td>This property captures the use of some resource to add value to another resource. Such resources may be nested, such as performing a theater play text, and then recording the performance, or creating an artful edition of a collection of poems or just aggregating various poems in an anthology.</td>
+					</tr>
+					<tr>
+						<td>edmIsDerivativeOf</td>
+						<td>edm:isDerivativeOf</td>
+						<td>Array (String)</td>
+						<td>This property captures a narrower notion of derivation than edm:isSimilarTo, in the sense that it relates a resource to another one, obtained by reworking, reducing, expanding, parts or the whole contents of the former, and possibly adding some minor parts.</td>
+					</tr>
+					<tr>
+						<td>edmIsNextInSequence</td>
+						<td>edm:isNextInSequence</td>
+						<td>String</td>
+						<td>edm:isNextInSequence relates two resources S and R that are ordered parts of the same resource A, and such that S comes immediately after R in the order created by their being parts of A.</td>
+					</tr>
+					<tr>
+						<td>edmIsRelatedTo</td>
+						<td>edm:isRelatedTo</td>
+						<td>LangMap</td>
+						<td>edm:isRelatedTo is the most general contextual property in EDM. Contextual properties have typically to do either with the things that have happened to or together with the object under consideration, or what the object refers to by its shape, form or features in a figural or encoded form.</td>
+					</tr>
+					<tr>
+						<td>edmIsRepresentationOf</td>
+						<td>edm:isRepresentationOf</td>
+						<td>String</td>
+						<td>This property associates a resource to another resource that it represents.</td>
+					</tr>
+					<tr>
+						<td>edmIsSimilarTo</td>
+						<td>edm:isSimilarTo</td>
+						<td>Array (String)</td>
+						<td>The most generic derivation property, covering also the case of questionable derivation. Is Similar To asserts that parts of the contents of one resource exhibit common features with respect to ideas, shapes, structures, colors, words, plots, topics with the contents of the related resource.</td>
+					</tr>
+					<tr>
+						<td>edmIsSuccessorOf</td>
+						<td>edm:isSuccessorOf</td>
+						<td>Array (String)</td>
+						<td>This property captures the relation between the continuation of a resource and that resource. This applies to a story, a serial, a journal etc. No content of the successor resource is identical or has a similar form with that of the precursor. The similarity is only in the context, subjects and figures of a plot. Successors typically form part of a common whole – such as a trilogy, a journal, etc.</td>
+					</tr>
+					<tr>
+						<td>edmRealizes</td>
+						<td>edm:realizes</td>
+						<td>Array (String)</td>
+						<td>This property describes a relation between a physical thing and the information resource that is contained in it, visible at it or otherwise carried by it, if applicable.</td>
+					</tr>
+					<tr>
+						<td>edmType</td>
+						<td>edm:type</td>
+						<td>String</td>
+						<td>The Europeana material type of the resource. All digital objects in Europeana have to be classified as one of the five Europeana material types using upper case letters: TEXT, IMAGE, SOUND, VIDEO or 3D.</td>
+					</tr>
+					<tr>
+						<td>edmRights</td>
+						<td>edm:rights</td>
+						<td>LangMap</td>
+						<td>Information about copyright of the digital object as specified by isShownBy and isShownAt.</td>
+					</tr>
+					<tr>
+						<td>edmWasPresentAt</td>
+						<td>edm:wasPresentAt</td>
+						<td>Array (String)</td>
+						<td>This property associates the people, things or information resources with an event at which they were present.</td>
+					</tr>
+					<tr>
+						<td>europeanaProxy</td>
+						<td></td>
+						<td>Boolean</td>
+						<td>Flag whether the proxy is an Europeana proxy. See chapter <em>6.2 Europeana proxies and data enrichment</em> in the <a href="http://www.pro.europeana.eu/documents/900548/770bdb58-c60e-4beb-a687-874639312ba5">EDM primer</a></td>
+					</tr>
+					<tr>
+						<td>proxyFor</td>
+						<td>ore:proxyFor</td>
+						<td>String</td>
+						<td>Proxy objects are used to represent a resource as it is aggregated in a particular aggregation. The ore:proxyFor relationship is used to link the proxy to the aggregated resource it is a proxy for. The subject of the relationship is a proxy object, and the object of the relationship is the aggregated resource.</td>
+					</tr>
+					<tr>
+						<td>proxyIn</td>
+						<td>ore:proxyIn</td>
+						<td>Array (String)</td>
+						<td>Proxy objects must also link to the aggregation in which the resource being proxied is aggregated. The ore:proxyIn relationship is used for this purpose. The subject of the relationship is a proxy object, and the object of the relationship is the aggregation.</td>
+					</tr>
+				</tbody>
+			</table>
+
+		<h3 id="Timespan">Timespan class</h3>
+
+			<p>EDM Timespan.</p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Qualified&nbsp;Name</th>
+						<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>about</td>
+						<td>rdf:about</td>
+						<td>String</td>
+						<td>Defines the resource being described</td>
+					</tr>
+					<tr>
+						<td>prefLabel</td>
+						<td>skos:prefLabel</td>
+						<td>LangMap</td>
+						<td>Preferred lexical label.</td>
+					</tr>
+					<tr>
+						<td>altLabel</td>
+						<td>skos:altLabel</td>
+						<td>LangMap</td>
+						<td>Alternative lexical label.</td>
+					</tr>
+					<tr>
+						<td>hiddenLabel</td>
+						<td>skos:hiddenLabel</td>
+						<td>LangMap</td>
+						<td>A hidden lexical label, represented by means of the skos:hiddenLabel property, is a lexical label for a resource, where a KOS designer would like that character string to be accessible to applications performing text-based indexing and search operations, but would not like that label to be visible otherwise.</td>
+					</tr>
+					<tr>
+						<td>note</td>
+						<td>skos:note</td>
+						<td>LangMap</td>
+						<td>Property for general documentation purposes.</td>
+					</tr>
+					<tr>
+						<td>begin</td>
+						<td>edm:begin</td>
+						<td>LangMap</td>
+						<td>This property denotes the start date of a period of time.</td>
+					</tr>
+					<tr>
+						<td>end</td>
+						<td>edm:end</td>
+						<td>LangMap</td>
+						<td>This property denotes the end date of a period of time.</td>
+					</tr>
+					<tr>
+						<td>isPartOf</td>
+						<td>dcterms:isPartOf</td>
+						<td>LangMap</td>
+						<td>A related resource in which the described resource is physically or logically included.</td>
+					</tr>
+					<tr>
+						<td>dctermsHasPart</td>
+						<td>dcterms:hasPart</td>
+						<td>LangMap</td>
+						<td>A related resource that is included either physically or logically in the described resource.</td>
+					</tr>
+					<tr>
+						<td>owlSameAs</td>
+						<td>owl:sameAs</td>
+						<td>Array (String)</td>
+						<td>owl:sameAs links an individual to an individual. Such an owl:sameAs statement indicates that two URI references actually refer to the same thing: the individuals have the same "identity".</td>
+					</tr>
+				</tbody>
+			</table>
+
+		<h3 id="WebResources">WebResources</h3>
+
+			<p></p>
+
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Qualified&nbsp;Name</th>
+						<th><a href="api-introduction.html#data-types">Data&nbsp;type</a></th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>about</td>
+						<td>rdf:about</td>
+						<td>String</td>
+						<td>URI of the webResource</td>
+					</tr>
+					<tr>
+						<td>webResourceDcRights</td>
+						<td>dc:rights</td>
+						<td>LangMap</a></td>
+						<td>Free text information about the rights in this object</td>
+					</tr>
+					<tr>
+						<td>webResourceEdmRights</td>
+						<td>edm:rights</td>
+						<td>LangMap</td>
+						<td>URI of the licence applied to the WebResource</td>
+					</tr>
+					<tr>
+						<td>dcDescription</td>
+						<td>dc:description</td>
+						<td>LangMap</td>
+						<td>An account of the resource.</td>
+					</tr>
+					<tr>
+						<td>dcFormat</td>
+						<td>dc:format</td>
+						<td>LangMap</td>
+						<td>The file format, physical medium or dimensions of the resource.</td>
+					</tr>
+					<tr>
+						<td>dcSource</td>
+						<td>dc:source</td>
+						<td>LangMap</td>
+						<td>A related resource from which the described resource is derived in whole or in part.</td>
+					</tr>
+					<tr>
+						<td>dctermsExtent</td>
+						<td>dcterms:extent</td>
+						<td>LangMap</td>
+						<td>The size or duration of the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsIssued</td>
+						<td>dcterms:issued</td>
+						<td>LangMap</td>
+						<td>Date of formal issuance (e.g., publication) of the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsConformsTo</td>
+						<td>dcterms:conformsTo</td>
+						<td>LangMap</td>
+						<td>An established standard to which the described resource conforms.</td>
+					</tr>
+					<tr>
+						<td>dctermsCreated</td>
+						<td>dcterms:created</td>
+						<td>LangMap</td>
+						<td>Date of creation of the resource.</td>
+					</tr>
+					<tr>
+						<td>dctermsIsFormatOf</td>
+						<td>dcterms:isFormatOf</td>
+						<td>LangMap</td>
+						<td>A related resource that is substantially the same as the described resource, but in another format.</td>
+					</tr>
+					<tr>
+						<td>dctermsHasPart</td>
+						<td>dcterms:hasPart</td>
+						<td>LangMap</td>
+						<td>A related resource that is included either physically or logically in the described resource.</td>
+					</tr>
+					<tr>
+						<td>isNextInSequence</td>
+						<td>edm:isNextInSequence</td>
+						<td>String</td>
+						<td>edm:isNextInSequence relates two resources S and R that are ordered parts of the same resource A, and such that S comes immediately after R in the order created by their being parts of A.</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+</div>
+

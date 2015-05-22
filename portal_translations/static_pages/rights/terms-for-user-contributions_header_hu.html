@@ -1,0 +1,39 @@
+
+
+<link rel="stylesheet" type="text/css" href="../sp/css/static.css"/>
+
+<style type="text/css">
+
+dl {
+	counter-reset: term definition;
+	line-height: 1.5;
+}
+
+dt {
+	display: inline;
+
+}
+
+dt:before {
+	counter-increment: term;
+	content: counter(term) ": ";
+}
+
+dd.first {
+		counter-reset: definition;
+}
+
+dd:before {
+	
+	counter-increment: definition;
+	content: counter(term) "." counter(definition) " ";
+	padding-right: 1em; 	
+
+}
+
+h2.article {margin: 1em 0;}
+ 
+
+</style>
+
+

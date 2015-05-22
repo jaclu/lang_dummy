@@ -1,0 +1,163 @@
+
+<style>
+.banner-redirect {
+  background-color: #e3fffb;
+  padding: 1em;
+}
+</style>
+<div id="content-main" class="with-sidebar">
+
+<h1>Introduction</h1>
+
+<p class="banner-redirect">We have recently released a new developer portal called <a href="http://labs.europeana.eu/api">Europeana Labs</a> where all the documentation and information about the Europeana APIs is available. The page you're viewing now is deprecated and will not be updated with any changes. By June 31 2014 this page will be deleted and links to it re-directed to <a href="http://labs.europeana.eu/api">Europeana Labs</a>.</p>  
+
+<p>
+The Europeana API allows you to build applications that use the wealth of cultural heritage objects stored in the Europeana repository. The API uses the standard technology of REST calls over HTTP. Responses are returned in the <a title="JSON" href="http://en.wikipedia.org/wiki/JSON">JSON</a> format.
+</p>
+
+<p>
+If you wish to get straight to the point of the API you can skip the rest of this section, <a title="Register" href="/portal/api/registration.html">register</a>, and proceed directly to the description of the API methods: <a href="api-search.html">search</a>, <a href="api-search.html">record</a>, and <a href="api-search.html"> suggestions</a>.
+</p>
+
+<h3>Registration</h3>
+<p>To start using the API you should register at the <a title="Registration page" href="/portal/api/registration.html">registration page</a>. Upon registration you will get your individual private authentication key. This key should be used when calling API methods as a <a href="api-working-with-api.html#Authentication">special <i>wskey</i> authentication parameter</a>.</p>
+
+<h3>Backward Compatibility</h3>
+<p>The current version of the Europeana API (API2) is fully backward compatible with the previous version (API1). However, we encourage developers to switch to the new naming of the fields that were used in API1. For more information on the mapping between the new and the old fields, please see <a title="API1-API2 Mapping" href="/portal/api-api1-api2.html">API1-API2 Fields Mapping</a>.</p>
+
+<h3>API Console</h3>
+<p>
+There is a method for developers to see how Europeana API works and test it for their needs without getting registered - the <a title="The API Console" href="/portal/api/console.html">API console</a>. This is an interactive tool that allows filling method parameters in an online form and see both the expected results and the exact format of the call that should be used by an application to get these results. The API console has been built by us for developers’ convenience. You are encouraged to use it and provide us feedback about its usability for the developer community.
+</p>
+
+<h3>Discussion</h3>
+<p>
+Join the <a title="The Europeana API discussion group" href="https://groups.google.com/forum/?pli=1#!forum/europeanaapi">Europeana API discussion group</a> at Google Groups and get regular updates about the Europeana API, provide feedback and discuss it with other developer.
+</p>
+
+
+<h3>Terms of Use</h3>
+<p>Please see <a title="terms of use" href="/portal/rights/api-terms-of-use.html">here</a> our Terms of Use.</p>
+
+<h3 name="data-types">Data types in API documentation</h3>
+
+<p>In the description of JSON response we refer to data types. We built online <a href="http://json.org" target="_blank">JSON.org's</a> conventions in the names of the data types, and we get the definitions from the <a href="http://en.wikipedia.org/wiki/JSON" target="_blank">Wikipedia</a>, except we regard integers as a subcategory of Number. We added a custom data type: LanguageMap as a shorthand for a special object.</p>
+
+<table class="bordered">
+  <thead>
+    <tr>
+      <th>Data type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Number</td>
+      <td>integer or double precision floating-point number</td>
+    </tr>
+    <tr>
+      <td>String</td>
+      <td>double-quoted Unicode, with backslash escaping</td>
+    </tr>
+    <tr>
+      <td>Boolean</td>
+      <td>true or false</td>
+    </tr>
+    <tr>
+      <td>Array</td>
+      <td>an ordered sequence of values, comma-separated and enclosed in square brackets; the values do not need to be of the same type</td>
+    </tr>
+    <tr>
+      <td>Array ([Data type])</td>
+      <td>an ordered sequence of another data type (such as String or an object), comma-separated and enclosed in square brackets; the values do not need to be of the same type</td>
+    </tr>
+    <tr>
+      <td>Object</td>
+      <td>an unordered collection of key:value pairs with the ':' character separating the key and the value, comma-separated and enclosed in curly braces; the keys must be strings and should be distinct from each other</td>
+    </tr>
+    <tr>
+      <td>LangMap</td>
+      <td>A special data type we use in the API Object Call, to provide values in various languages. It is an associative array where the keys are ISO language codes or "def" (where the language is not given), and the value is an array of strings. For example: <code>"dcTitle": {"por": ["Paris"]}</code>. Here the data type of dcTitle is a LanguageMap: the language code is "por" (stands for Portuguese), and the value is a list with only one element: "Paris". For those familiar with Java notations: is it the JSON equivalent of <code>Map&lt;String,List&lt;String>></code></td>
+    </tr>
+    <tr>
+      <td>null</td>
+      <td>empty</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<h3 name="namespaces">Namespaces</h3>
+
+<p>In the documentation we sometime refer to namespace prefixes, such as dc, skos, edm. Here we list all the namespace prefixes and URIs.</p>
+
+<table class="bordered">
+  <thead>
+    <tr>
+      <th>prefix</th>
+      <th>Namespace URI</th>
+      <th>More info</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>dc</td>
+      <td>http://purl.org/dc/elements/1.1/</td>
+      <td>Dublin Core</td>
+    </tr>
+    <tr>
+      <td>dcterms</td>
+      <td>http://purl.org/dc/terms/</td>
+      <td>Dublin Core Mmetadata Initiative (DCMI) Metadata Terms <a href="http://dublincore.org/documents/2012/06/14/dcmi-terms/">http://dublincore.org/documents/2012/06/14/dcmi-terms/</a></td>
+    </tr>
+    <tr>
+      <td>edm</td>
+      <td>http://www.europeana.eu/schemas/edm/</td>
+      <td>Europeana Data Model</td>
+    </tr>
+    <tr>
+      <td>foaf</td>
+      <td>http://xmlns.com/foaf/0.1/</td>
+      <td>FOAF (Friend of a Friend) Vocabulary <a href="http://xmlns.com/foaf/spec/">http://xmlns.com/foaf/spec/</a></td>
+    </tr>
+    <tr>
+      <td>ore</td>
+      <td>http://www.openarchives.org/ore/terms/</td>
+      <td>Open Archives Initiative Object Reuse and Exchange <a href="http://www.openarchives.org/ore/1.0/">http://www.openarchives.org/ore/1.0/</a></td>
+    </tr>
+    <tr>
+      <td>owl</td>
+      <td>http://www.w3.org/2002/07/owl#</td>
+      <td>OWL Web Ontology Language</td>
+    </tr>
+    <tr>
+      <td>rdaGr2</td>
+      <td>http://rdvocab.info/ElementsGr2/</td>
+      <td>RDA Group 2 elements. <a href="http://metadataregistry.org/schema/show/id/15.html">http://metadataregistry.org/schema/show/id/15.html</a></td>
+    </tr>
+    <tr>
+      <td>rdf</td>
+      <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
+      <td>Resource Description Framework</td>
+    </tr>
+    <tr>
+      <td>skos</td>
+      <td>http://www.w3.org/2004/02/skos/core#</td>
+      <td>Simple Knowledge Organization System <a href="http://www.w3.org/2009/08/skos-reference/skos.html">http://www.w3.org/2009/08/skos-reference/skos.html</a></td>
+    </tr>
+    <tr>
+      <td>wgs84</td>
+      <td>http://www.w3.org/2003/01/geo/wgs84_pos#</td>
+      <td>WGS84 Geo Positioning <a href="http://www.w3.org/2003/01/geo/">http://www.w3.org/2003/01/geo/</a></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+

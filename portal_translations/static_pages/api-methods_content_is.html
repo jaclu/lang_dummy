@@ -1,0 +1,91 @@
+
+<style>
+.required{color:red;font-weight:bold}
+.todo{color:green}
+.bordered a{display:inline}
+#content-main h2{margin-top:1em}
+#content-main h3{margin:1em 0}
+#content-main{overflow:auto}
+.bordered td,.bordered th{line-height:140%;word-wrap:break-word;}
+#content-main sup, #content-main sub{vertical-align:baseline;position:relative;top:-0.4em;font-weight:bold}
+#content-main sub{top:0.4em}
+#footnotes{margin-top:3em}
+#content-main pre{color:rgb(136,0,0);overflow:auto}
+.banner-redirect {
+	background-color: #e3fffb;
+	padding: 1em;
+}
+</style>
+
+<div id="content-main" class="with-sidebar">
+
+	<h2 id="API Methods">API Methods</h2>
+
+	<p class="banner-redirect">We have recently released a new developer portal called <a href="http://labs.europeana.eu/api">Europeana Labs</a> where all the documentation and information about the Europeana APIs is available. The page you're viewing now is deprecated and will not be updated with any changes. By June 31 2014 this page will be deleted and links to it re-directed to <a href="http://labs.europeana.eu/api">Europeana Labs</a>.</p> 
+	
+	<p>
+		Below is a summary of the API methods available.</p>
+	
+		<table class="bordered">
+
+			<thead>
+
+				<tr>
+					<th>Method</th>
+					<th>Description</th>
+				</tr>
+
+			</thead>
+
+			<tbody>					
+					<tr>
+						<td colspan="2">Search and Retrieve Records</td>
+					</tr>
+					<tr>
+						<td><a href="/portal/api-record-json.html" title="record.json">record.json</a></td>
+						<td>Retrieve information about a single record within the Europeana repository.</td>
+					</tr>
+
+					<tr>
+						<td><a href="/portal/api-search-json.html" title="search.json">search.json</a></td>
+						<td>Find records within the Europeana repository.</td>
+					</tr>
+					<tr>
+						<td><a href="/portal/api-suggestions-json.html" title="suggestions.json">suggestions.json</a></td>
+						<td>Provides suggestions aimed at applications that use autocompletion for search queries.</td>
+					</tr>
+					
+					<tr>
+						<td><a href="/portal/api-opensearch-rss.html" title="opensearch.rss">opensearch.rss</a></td>
+						<td>Find objects within the Europeana repository following the <a href="http://www.opensearch.org/" target="_blank">OpenSearch specification</a>.</td>
+					</tr>			 		
+					<tr>
+						<td colspan="2">MyEuropeana Actions</td>
+					</tr>
+					<tr>
+						<td><a href="/portal/api-profile-json.html" title="profile.json">profile.json</a></td>
+						<td>Retrieve user profile information</td>
+					</tr>
+					<tr>
+						<td><a href="/portal/api-saveditem-json.html" title="savedited.json">saveditem.json</a></td>
+						<td>Manage favourite records</td>
+					</tr>
+					<tr>
+						<td><a href="/portal/api-tag-json.html" title="tag.json">tag.json</a></td>
+						<td>Manage tags</td>
+					</tr>
+					<tr>
+						<td><a href="/portal/api-savedsearch-json.html" title="savedsearch.json">savedsearch.json</a></td>
+						<td>Manage saved searches</td>
+					</tr>
+					<tr>
+						<td colspan="2">Data Providers and Datasets</td>
+					</tr>
+		
+				</tbody>
+		
+		</table>
+
+	</p>
+</div>
+
