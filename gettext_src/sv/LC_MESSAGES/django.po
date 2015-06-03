@@ -104,7 +104,7 @@ msgstr ""
 
 #: apps/translate_docs/static_page/aboutus.html:36
 msgid "the drawings of"
-msgstr ""
+msgstr "ritandet av"
 
 #: apps/translate_docs/static_page/aboutus.html:36
 msgid "Leonardo da Vinci"
