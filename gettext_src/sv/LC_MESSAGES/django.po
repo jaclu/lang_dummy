@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -78,7 +78,7 @@ msgstr ""
 
 #: apps/translate_docs/static_page/aboutus.html:30
 msgid "Sounds"
-msgstr ""
+msgstr "Ljud"
 
 #: apps/translate_docs/static_page/aboutus.html:30
 msgid ""
