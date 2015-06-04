@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-21 10:46+0200\n"
+"POT-Creation-Date: 2015-06-04 10:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -169,6 +169,95 @@ msgstr ""
 msgid "See the storyline and image credits for the Europeana video (above)"
 msgstr ""
 
+#: apps/translate_docs/static_page/aboutus_enews.html:4
+msgid "Europeana newsletters"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:11
+#: apps/translate_docs/template/leftmenu.html:10
+msgid "Previous newsletters"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:15
+#: apps/translate_docs/static_page/aboutus_enews.html:27
+#: apps/translate_docs/static_page/aboutus_enews.html:37
+#: apps/translate_docs/static_page/aboutus_enews.html:46
+#: apps/translate_docs/static_page/aboutus_enews.html:55
+msgid "February"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:15
+msgid "New digital resources on the First World War"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:16
+msgid "January"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:16
+msgid "Europeana Open Culture app now bigger and better!"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:22
+#: apps/translate_docs/static_page/aboutus_enews.html:32
+#: apps/translate_docs/static_page/aboutus_enews.html:41
+#: apps/translate_docs/static_page/aboutus_enews.html:50
+#: apps/translate_docs/static_page/aboutus_enews.html:60
+msgid "December"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:22
+msgid "Discover a virtual museum and a year of culture"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:23
+#: apps/translate_docs/static_page/aboutus_enews.html:33
+#: apps/translate_docs/static_page/aboutus_enews.html:51
+msgid "November"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:23
+msgid "Europe's culture - collected for you"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:24
+#: apps/translate_docs/static_page/aboutus_enews.html:34
+#: apps/translate_docs/static_page/aboutus_enews.html:43
+#: apps/translate_docs/static_page/aboutus_enews.html:52
+msgid "September"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:24
+msgid "Discover Europeana's hand-picked collections"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:25
+#: apps/translate_docs/static_page/aboutus_enews.html:35
+#: apps/translate_docs/static_page/aboutus_enews.html:44
+#: apps/translate_docs/static_page/aboutus_enews.html:53
+msgid "June"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:25
+msgid ""
+"Download free iPad app, explore great new content &amp; join Europeana 1989"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:26
+#: apps/translate_docs/static_page/aboutus_enews.html:36
+#: apps/translate_docs/static_page/aboutus_enews.html:45
+#: apps/translate_docs/static_page/aboutus_enews.html:54
+msgid "April"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:26
+msgid "New look Europeana, Lithuania's buried secrets"
+msgstr ""
+
+#: apps/translate_docs/static_page/aboutus_enews.html:42
+msgid "October"
+msgstr ""
+
 #: apps/translate_docs/template/leftmenu.html:3
 msgid "About Us"
 msgstr ""
@@ -183,10 +272,6 @@ msgstr ""
 
 #: apps/translate_docs/template/leftmenu.html:9
 msgid "All providers"
-msgstr ""
-
-#: apps/translate_docs/template/leftmenu.html:10
-msgid "Previous newsletters"
 msgstr ""
 
 #: apps/translate_docs/template/leftmenu.html:12
